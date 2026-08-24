@@ -4,127 +4,270 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>6. trinn – læring og spill</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
       :root {
-        --ink:#17324d;
-        --muted:#5b6d7e;
-        --paper:#f7fbff;
-        --blue:#246bce;
-        --yellow:#ffd761;
-        --line:#dbe7f1;
+        --bg:#170f2e;
+        --bg2:#221a45;
+        --panel:#2a2058;
+        --ink:#f2edff;
+        --muted:#b3a4e0;
+        --line:#4a3b82;
+
+        --norsk:#ff4d8d;
+        --matte:#3ddc97;
+        --engelsk:#4dd8ff;
+        --diverse:#ffd23f;
       }
 
-      * {
-        box-sizing:border-box;
-      }
+      * { box-sizing:border-box; }
 
       body {
         margin:0;
-        font-family:ui-rounded, "Avenir Next", Avenir, "Segoe UI", sans-serif;
+        font-family:"Space Grotesk", "Segoe UI", sans-serif;
         color:var(--ink);
-        background:var(--paper);
+        background:
+          repeating-linear-gradient(rgba(255,255,255,.025) 0 1px, transparent 1px 3px),
+          radial-gradient(ellipse at 20% -10%, #3a2a70 0%, transparent 55%),
+          radial-gradient(ellipse at 90% 0%, #2a4a6e 0%, transparent 45%),
+          var(--bg);
       }
 
+      .pixel {
+        clip-path: polygon(
+          0 8px, 8px 8px, 8px 0,
+          calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px,
+          100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
+          8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
+        );
+      }
+
+      .pixel-sm {
+        clip-path: polygon(
+          0 4px, 4px 4px, 4px 0,
+          calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+          100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+          4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+        );
+      }
+
+      /* ---------- HEADER / MARQUEE ---------- */
       header {
-        background:linear-gradient(125deg,#1555ad,#2d86db);
-        color:white;
-        padding:3.4rem 1.25rem 4.75rem;
+        position:relative;
+        padding:0 0 4.5rem;
       }
 
-      .wrap {
+      .bulbs {
+        height:14px;
+        background-image:repeating-radial-gradient(circle, #ffd23f 0 2.5px, transparent 3.5px 26px);
+        background-position:6px center;
+        opacity:.85;
+      }
+
+      .marquee {
         max-width:1100px;
-        margin:auto;
+        margin:2.2rem auto 0;
+        padding:2.6rem 1.5rem 2.2rem;
+        text-align:center;
+        background:linear-gradient(180deg,#2c2260,#1c1444);
+        border:3px solid #4a3b82;
+        position:relative;
+      }
+
+      .marquee .eyebrow {
+        font-family:"Press Start 2P", monospace;
+        font-size:.6rem;
+        letter-spacing:.08em;
+        color:var(--diverse);
+        text-shadow:0 0 8px rgba(255,210,63,.6);
       }
 
       h1 {
-        font-size:clamp(2rem,5vw,3.7rem);
-        margin:.7rem 0 .45rem;
-        letter-spacing:-.04em;
+        font-family:"Press Start 2P", monospace;
+        font-size:clamp(1.7rem,6vw,3.1rem);
+        line-height:1.3;
+        margin:1rem 0 .8rem;
+        color:#fff;
+        text-shadow:
+          0 0 6px rgba(77,216,255,.55),
+          3px 3px 0 var(--norsk),
+          6px 6px 0 rgba(0,0,0,.35);
       }
 
+      .caret-line {
+        font-family:"Space Grotesk", monospace;
+        color:var(--muted);
+        font-size:1.02rem;
+      }
+
+      .caret {
+        display:inline-block;
+        width:.6em;
+        background:var(--engelsk);
+        animation:blink 1s steps(1) infinite;
+        margin-left:.2em;
+      }
+
+      @keyframes blink { 50% { opacity:0; } }
+
+      /* ---------- MAIN ---------- */
       main {
         max-width:1100px;
-        margin:-2.4rem auto 3rem;
+        margin:-1.8rem auto 3rem;
         padding:0 1.25rem;
       }
 
       .intro {
-        margin:2.5rem 0 1.1rem;
+        background:var(--panel);
+        border:2px solid var(--line);
+        padding:1rem 1.3rem;
+        margin:0 0 1.6rem;
         color:var(--muted);
         line-height:1.55;
       }
 
       .grid {
         display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
-        gap:1rem;
+        grid-template-columns:repeat(auto-fit,minmax(255px,1fr));
+        gap:1.3rem;
       }
 
       section {
-        background:white;
-        border:1px solid var(--line);
-        border-radius:16px;
-        padding:1.25rem;
+        background:var(--panel);
+        border:2px solid var(--line);
+        padding:1.3rem 1.3rem 1.15rem;
+        position:relative;
+        overflow:hidden;
       }
 
+      section::before {
+        content:"";
+        position:absolute;
+        inset:0;
+        background:repeating-linear-gradient(rgba(255,255,255,.035) 0 1px, transparent 1px 3px);
+        pointer-events:none;
+      }
+
+      section[data-subject="norsk"]   { border-color:var(--norsk); box-shadow:0 0 0 1px rgba(255,77,141,.15), 0 0 26px -12px var(--norsk); }
+      section[data-subject="matte"]   { border-color:var(--matte); box-shadow:0 0 0 1px rgba(61,220,151,.15), 0 0 26px -12px var(--matte); }
+      section[data-subject="engelsk"] { border-color:var(--engelsk); box-shadow:0 0 0 1px rgba(77,216,255,.15), 0 0 26px -12px var(--engelsk); }
+      section[data-subject="diverse"] { border-color:var(--diverse); box-shadow:0 0 0 1px rgba(255,210,63,.15), 0 0 26px -12px var(--diverse); }
+
+      .badge {
+        width:2.3rem;
+        height:2.3rem;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:1.1rem;
+        margin-bottom:.7rem;
+        position:relative;
+        z-index:1;
+      }
+
+      section[data-subject="norsk"]   .badge { background:var(--norsk); }
+      section[data-subject="matte"]   .badge { background:var(--matte); }
+      section[data-subject="engelsk"] .badge { background:var(--engelsk); }
+      section[data-subject="diverse"] .badge { background:var(--diverse); }
+
       h2 {
-        font-size:1.22rem;
-        margin:0 0 .25rem;
+        font-family:"Press Start 2P", monospace;
+        font-size:.92rem;
+        line-height:1.4;
+        margin:0 0 .5rem;
+        position:relative;
+        z-index:1;
       }
 
       .description {
         color:var(--muted);
-        margin:0 0 1rem;
-        font-size:.94rem;
-        line-height:1.4;
+        margin:0 0 1.1rem;
+        font-size:.9rem;
+        line-height:1.45;
+        position:relative;
+        z-index:1;
       }
 
       .links {
         display:grid;
-        gap:.7rem;
+        gap:.55rem;
+        position:relative;
+        z-index:1;
       }
 
       a.card {
         text-decoration:none;
         color:var(--ink);
         display:block;
-        padding:.75rem;
-        border-radius:10px;
-        background:#f5f9fd;
-        border:1px solid transparent;
-        transition:.15s;
+        padding:.65rem .8rem;
+        background:var(--bg2);
+        border:1px solid var(--line);
+        border-left:3px solid var(--line);
+        transition:transform .12s ease, border-color .12s ease, background .12s ease;
       }
 
+      a.card::before {
+        content:"▸ ";
+        opacity:0;
+        color:inherit;
+        transition:opacity .12s ease;
+      }
+
+      section[data-subject="norsk"]   a.card:hover { border-left-color:var(--norsk); }
+      section[data-subject="matte"]   a.card:hover { border-left-color:var(--matte); }
+      section[data-subject="engelsk"] a.card:hover { border-left-color:var(--engelsk); }
+      section[data-subject="diverse"] a.card:hover { border-left-color:var(--diverse); }
+
       a.card:hover,
-      a.card:focus {
-        border-color:#8bb8ec;
-        background:#edf6ff;
-        transform:translateY(-1px);
+      a.card:focus-visible {
+        background:#382c6e;
+        transform:translateX(4px);
+      }
+
+      a.card:hover::before,
+      a.card:focus-visible::before { opacity:1; }
+
+      a.card:focus-visible {
+        outline:2px solid var(--engelsk);
+        outline-offset:2px;
       }
 
       .name {
         display:block;
-        font-weight:800;
+        font-weight:700;
+        font-size:.95rem;
       }
 
       .note {
         display:block;
         color:var(--muted);
-        font-size:.84rem;
-        margin-top:.18rem;
+        font-size:.82rem;
+        margin-top:.2rem;
+        line-height:1.35;
       }
 
       footer {
         text-align:center;
+        font-family:"Press Start 2P", monospace;
+        font-size:.62rem;
+        letter-spacing:.05em;
         color:var(--muted);
-        font-size:.85rem;
-        padding:0 1rem 2rem;
+        padding:1rem 1rem 2.6rem;
+      }
+
+      footer span {
+        color:var(--diverse);
+        animation:blink 1.4s steps(1) infinite;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .caret, footer span { animation:none; opacity:1; }
       }
 
       @media (max-width:540px) {
-        header {
-          padding-top:2.5rem;
-        }
+        .marquee { padding:2rem 1rem 1.7rem; }
       }
     </style>
   </head>
@@ -132,22 +275,24 @@
   <body>
 
     <header>
-      <div class="wrap">
-        <h1>6. trinn</h1>
+      <div class="bulbs"></div>
+      <div class="marquee pixel">
+        <span class="eyebrow">ARKADEN · FJELLSDALEN</span>
+        <h1>6. TRINN</h1>
+        <p class="caret-line">Velg et fag<span class="caret">&nbsp;</span></p>
       </div>
     </header>
 
     <main>
 
-      <p class="intro">
-        Velg et felt og legg til lenker etter hvert.
-      </p>
+      <p class="intro">Velg et felt og legg til lenker etter hvert.</p>
 
       <div class="grid" id="sections">
 
         <!-- NORSK -->
-        <section data-search="norsk">
-          <h2>📚 Norsk</h2>
+        <section class="pixel" data-subject="norsk" data-search="norsk">
+          <div class="badge pixel-sm">📚</div>
+          <h2>NORSK</h2>
           <p class="description">Legg til lenker til norskfaget her.</p>
 
           <div class="links">
@@ -163,8 +308,9 @@
 
 
         <!-- MATTE -->
-        <section data-search="matte matematikk">
-          <h2>🔢 Matte</h2>
+        <section class="pixel" data-subject="matte" data-search="matte matematikk">
+          <div class="badge pixel-sm">🔢</div>
+          <h2>MATTE</h2>
           <p class="description">Spill og aktiviteter for matematikk og problemløsing.</p>
 
           <div class="links">
@@ -190,8 +336,9 @@
 
 
         <!-- ENGELSK -->
-        <section data-search="engelsk">
-          <h2>🗣️ Engelsk</h2>
+        <section class="pixel" data-subject="engelsk" data-search="engelsk">
+          <div class="badge pixel-sm">🗣️</div>
+          <h2>ENGELSK</h2>
           <p class="description">Spill og aktiviteter for engelsktrening.</p>
 
           <div class="links">
@@ -209,8 +356,9 @@
 
 
         <!-- DIVERSE -->
-        <section data-search="diverse spill">
-          <h2>📌 Diverse</h2>
+        <section class="pixel" data-subject="diverse" data-search="diverse spill">
+          <div class="badge pixel-sm">📌</div>
+          <h2>DIVERSE</h2>
           <p class="description">Andre nyttige spill og aktiviteter.</p>
 
           <div class="links">
@@ -250,7 +398,7 @@
       </div>
     </main>
 
-    <footer>6. trinn</footer>
+    <footer>© 6. TRINN <span>&nbsp;&nbsp;</span> FLERE SPILL KOMMER</footer>
 
   </body>
 </html>
