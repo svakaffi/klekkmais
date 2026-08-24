@@ -5,52 +5,252 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>6. trinn – læring og spill</title>
     <style>
-      :root { --ink:#17324d; --muted:#5b6d7e; --paper:#f7fbff; --blue:#246bce; --yellow:#ffd761; --line:#dbe7f1; }
-      * { box-sizing:border-box; }
-      body { margin:0; font-family:ui-rounded, "Avenir Next", Avenir, "Segoe UI", sans-serif; color:var(--ink); background:var(--paper); }
-      header { background:linear-gradient(125deg,#1555ad,#2d86db); color:white; padding:3.4rem 1.25rem 4.75rem; }
-      .wrap { max-width:1100px; margin:auto; }
-      .tag { display:inline-block; padding:.35rem .7rem; border-radius:99px; background:rgba(255,255,255,.16); font-weight:700; font-size:.88rem; }
-      h1 { font-size:clamp(2rem,5vw,3.7rem); margin:.7rem 0 .45rem; letter-spacing:-.04em; }
-      header p { max-width:650px; margin:0; font-size:1.1rem; line-height:1.6; opacity:.95; }
-      main { max-width:1100px; margin:-2.4rem auto 3rem; padding:0 1.25rem; }
-      .tools { display:flex; gap:.75rem; align-items:center; background:white; padding:1rem; border-radius:18px; box-shadow:0 10px 26px #20456b1c; }
-      input { width:100%; border:1px solid var(--line); padding:.85rem 1rem; border-radius:10px; font:inherit; color:var(--ink); }
-      .tools label { white-space:nowrap; font-weight:700; }
-      .intro { margin:2.5rem 0 1.1rem; color:var(--muted); line-height:1.55; }
-      .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(245px,1fr)); gap:1rem; }
-      section { background:white; border:1px solid var(--line); border-radius:16px; padding:1.25rem; }
-      h2 { font-size:1.22rem; margin:0 0 .25rem; }
-      .description { color:var(--muted); margin:0 0 1rem; font-size:.94rem; line-height:1.4; }
-      .links { display:grid; gap:.7rem; }
-      a.card { text-decoration:none; color:var(--ink); display:block; padding:.75rem; border-radius:10px; background:#f5f9fd; border:1px solid transparent; transition:.15s; }
-      a.card:hover, a.card:focus { border-color:#8bb8ec; background:#edf6ff; transform:translateY(-1px); }
-      .name { display:block; font-weight:800; }
-      .note { display:block; color:var(--muted); font-size:.84rem; margin-top:.18rem; }
-      footer { text-align:center; color:var(--muted); font-size:.85rem; padding:0 1rem 2rem; }
-      @media (max-width:540px) { .tools { align-items:stretch; flex-direction:column; } header { padding-top:2.5rem; } }
+      :root {
+        --ink:#17324d;
+        --muted:#5b6d7e;
+        --paper:#f7fbff;
+        --blue:#246bce;
+        --yellow:#ffd761;
+        --line:#dbe7f1;
+      }
+
+      * {
+        box-sizing:border-box;
+      }
+
+      body {
+        margin:0;
+        font-family:ui-rounded, "Avenir Next", Avenir, "Segoe UI", sans-serif;
+        color:var(--ink);
+        background:var(--paper);
+      }
+
+      header {
+        background:linear-gradient(125deg,#1555ad,#2d86db);
+        color:white;
+        padding:3.4rem 1.25rem 4.75rem;
+      }
+
+      .wrap {
+        max-width:1100px;
+        margin:auto;
+      }
+
+      h1 {
+        font-size:clamp(2rem,5vw,3.7rem);
+        margin:.7rem 0 .45rem;
+        letter-spacing:-.04em;
+      }
+
+      main {
+        max-width:1100px;
+        margin:-2.4rem auto 3rem;
+        padding:0 1.25rem;
+      }
+
+      .intro {
+        margin:2.5rem 0 1.1rem;
+        color:var(--muted);
+        line-height:1.55;
+      }
+
+      .grid {
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+        gap:1rem;
+      }
+
+      section {
+        background:white;
+        border:1px solid var(--line);
+        border-radius:16px;
+        padding:1.25rem;
+      }
+
+      h2 {
+        font-size:1.22rem;
+        margin:0 0 .25rem;
+      }
+
+      .description {
+        color:var(--muted);
+        margin:0 0 1rem;
+        font-size:.94rem;
+        line-height:1.4;
+      }
+
+      .links {
+        display:grid;
+        gap:.7rem;
+      }
+
+      a.card {
+        text-decoration:none;
+        color:var(--ink);
+        display:block;
+        padding:.75rem;
+        border-radius:10px;
+        background:#f5f9fd;
+        border:1px solid transparent;
+        transition:.15s;
+      }
+
+      a.card:hover,
+      a.card:focus {
+        border-color:#8bb8ec;
+        background:#edf6ff;
+        transform:translateY(-1px);
+      }
+
+      .name {
+        display:block;
+        font-weight:800;
+      }
+
+      .note {
+        display:block;
+        color:var(--muted);
+        font-size:.84rem;
+        margin-top:.18rem;
+      }
+
+      footer {
+        text-align:center;
+        color:var(--muted);
+        font-size:.85rem;
+        padding:0 1rem 2rem;
+      }
+
+      @media (max-width:540px) {
+        header {
+          padding-top:2.5rem;
+        }
+      }
     </style>
   </head>
+
   <body>
-    <header><div class="wrap">
-      <h1>6. trinn</h1>
-    </div></header>
+
+    <header>
+      <div class="wrap">
+        <h1>6. trinn</h1>
+      </div>
+    </header>
+
     <main>
-      <p class="intro">Velg et felt og legg til lenker etter hvert.</p>
+
+      <p class="intro">
+        Velg et felt og legg til lenker etter hvert.
+      </p>
+
       <div class="grid" id="sections">
-        <section data-search="norsk"><h2>📚 Norsk</h2><p class="description">Legg til lenker til norskfaget her.</p><div class="links"></div></section>
-        <section data-search="matte matematikk"><h2>🔢 Matte</h2><p class="description">Legg til lenker til matematikk her.</p><div class="links">
-          <a class="card" href="https://www.matematikk.org/trinn5-7/gangetesteren/" target="_blank" rel="noopener"><span class="name">Gangetesteren</span><span class="note">Øv på gangetabellen.</span></a>
-        </div></section>
-        <section data-search="engelsk"><h2>🗣️ Engelsk</h2><p class="description">Legg til lenker til engelskfaget her.</p><div class="links"></div></section>
-        <section data-search="diverse"><h2>📌 Diverse</h2><p class="description">Legg til andre nyttige lenker her.</p><div class="links">
-          <a class="card" href="https://scratch.mit.edu/projects/editor/?tutorial=getStarted" target="_blank" rel="noopener"><span class="name">Scratch</span><span class="note">Lag spill, fortellinger og animasjoner med koding.</span></a>
-          <a class="card" href="simon.html"><span class="name">Simon</span><span class="note">Husk og gjenta rekkefølgen av farger.</span></a>
-          <a class="card" href="https://www.focusaur.com/pages/attention-span-test-game" target="_blank" rel="noopener"><span class="name">Attention Span Test</span><span class="note">Et spill som utfordrer oppmerksomhet og reaksjon.</span></a>
-          <a class="card" href="https://www.chess.com/no/play/computer" target="_blank" rel="noopener"><span class="name">Chess.com</span><span class="note">Spill sjakk mot datamaskinen.</span></a>
-        </div></section>
+
+        <!-- NORSK -->
+        <section data-search="norsk">
+          <h2>📚 Norsk</h2>
+          <p class="description">Legg til lenker til norskfaget her.</p>
+
+          <div class="links">
+            <a class="card"
+               href="https://crosswordlabs.com/"
+               target="_blank"
+               rel="noopener">
+              <span class="name">Crossword Labs</span>
+              <span class="note">Lag og løs kryssord.</span>
+            </a>
+          </div>
+        </section>
+
+
+        <!-- MATTE -->
+        <section data-search="matte matematikk">
+          <h2>🔢 Matte</h2>
+          <p class="description">Spill og aktiviteter for matematikk og problemløsing.</p>
+
+          <div class="links">
+
+            <a class="card"
+               href="https://www.matematikk.org/trinn5-7/gangetesteren/"
+               target="_blank"
+               rel="noopener">
+              <span class="name">Gangetesteren</span>
+              <span class="note">Øv på gangetabellen.</span>
+            </a>
+
+            <a class="card"
+               href="https://www.mathsisfun.com/games/a/sokoban/index.html"
+               target="_blank"
+               rel="noopener">
+              <span class="name">Sokoban</span>
+              <span class="note">Et logikkspill med problemløsing og strategi.</span>
+            </a>
+
+          </div>
+        </section>
+
+
+        <!-- ENGELSK -->
+        <section data-search="engelsk">
+          <h2>🗣️ Engelsk</h2>
+          <p class="description">Spill og aktiviteter for engelsktrening.</p>
+
+          <div class="links">
+
+            <a class="card"
+               href="https://www.gamestolearnenglish.com/hangman/"
+               target="_blank"
+               rel="noopener">
+              <span class="name">Hangman</span>
+              <span class="note">Øv på engelske ord med Hangman.</span>
+            </a>
+
+          </div>
+        </section>
+
+
+        <!-- DIVERSE -->
+        <section data-search="diverse spill">
+          <h2>📌 Diverse</h2>
+          <p class="description">Andre nyttige spill og aktiviteter.</p>
+
+          <div class="links">
+
+            <a class="card"
+               href="https://scratch.mit.edu/projects/editor/?tutorial=getStarted"
+               target="_blank"
+               rel="noopener">
+              <span class="name">Scratch</span>
+              <span class="note">Lag spill, fortellinger og animasjoner med koding.</span>
+            </a>
+
+            <a class="card" href="simon.html">
+              <span class="name">Simon</span>
+              <span class="note">Husk og gjenta rekkefølgen av farger.</span>
+            </a>
+
+            <a class="card"
+               href="https://www.wordle.lol/"
+               target="_blank"
+               rel="noopener">
+              <span class="name">Wordle</span>
+              <span class="note">Gjett ordet på seks forsøk.</span>
+            </a>
+
+            <a class="card"
+               href="https://www.chess.com/no/play/computer"
+               target="_blank"
+               rel="noopener">
+              <span class="name">Chess.com</span>
+              <span class="note">Spill sjakk mot datamaskinen.</span>
+            </a>
+
+          </div>
+        </section>
+
       </div>
     </main>
+
     <footer>6. trinn</footer>
+
   </body>
 </html>
